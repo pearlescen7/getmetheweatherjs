@@ -6,6 +6,14 @@ window.addEventListener('load', ()=> {
     let locationTimezone = document.querySelector('.location-timezone'); 
     let degreeSection = document.querySelector('.degree-section');
     let degreeSectionSpan = document.querySelector('.degree-section span');
+    let dateSection = document.querySelector('.date-section');
+    
+    setInterval(updateDate, 500);
+    function updateDate(){
+        let day = new Date().toString();
+        day = day.split(' ', 5).join(' ');
+        dateSection.textContent = day;
+    }
 
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position =>{
@@ -13,7 +21,7 @@ window.addEventListener('load', ()=> {
             lat = position.coords.latitude;
 
             const proxy = "http://cors-anywhere.herokuapp.com/";
-            const api = `${proxy}https://api.darksky.net/forecast/11c8dbbf2e16815e81e7ee8883284cde/${lat},${long}`;
+            const api = `${proxy}https://api.darksky.net/forecast/11c8dbbf2e16815e81e7ee8883284cde/${lat},${long}?units=si`;
 
             fetch(api)
             .then(response =>{
@@ -26,19 +34,19 @@ window.addEventListener('load', ()=> {
                 temperatureDegree.textContent = temperature;
                 temperatureDescription.textContent = summary;
                 locationTimezone.textContent = data.timezone;
-                degreeSectionSpan.textContent = 'F';
-                let celsius = (temperature - 32) * (5 / 9);
+                degreeSectionSpan.textContent = 'C';
+                let fahrenheit = (temperature * (9 / 5) + 32);
                 
                 //Setting Icons
                 setIcon(icon, document.querySelector(".icon"));
 
                 //Change between Celsius/Fahrenheit
                 degreeSection.addEventListener("click", () => {
-                    if(degreeSectionSpan.textContent == 'F'){
-                        degreeSectionSpan.textContent = 'C';
-                        temperatureDegree.textContent = celsius.toFixed(2);
-                    } else {
+                    if(degreeSectionSpan.textContent == 'C'){
                         degreeSectionSpan.textContent = 'F';
+                        temperatureDegree.textContent = fahrenheit.toFixed(2);
+                    } else {
+                        degreeSectionSpan.textContent = 'C';
                         temperatureDegree.textContent = temperature;
                     }
 
