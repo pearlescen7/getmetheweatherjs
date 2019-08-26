@@ -45,3 +45,20 @@ body{
 .degree-section h2{
     font-size: 40px;
 }
+
+.getterButton button{
+    -background-color: #2F76A3;
+    background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
+    border: white solid 3px;
+    padding: 10px;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.getterButton button:hover{
+    background: linear-gradient(rgb(48, 62, 143), rgb(47, 150, 163));
+}
