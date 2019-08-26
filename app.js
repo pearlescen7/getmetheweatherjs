@@ -1,5 +1,10 @@
 window.addEventListener('load', ()=> {
-    let getterButton = document.querySelector('.getterButton');
+    let helpButton = document.getElementById("helpButton");
+    helpButton.addEventListener('click', () =>{
+        alert("Allow unknown sources if the page isn't displayed correctly.")
+    });
+
+    let getterButton = document.getElementById("getterButton");
     getterButton.addEventListener('click', () =>{
         let long;
         let lat;
